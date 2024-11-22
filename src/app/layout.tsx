@@ -1,17 +1,24 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Footer, Header, ViewCanvas } from "@/components/shared";
 
-const alpinoVariable = localFont({
-  src: "./fonts/Alpino-Variable.woff2",
-  variable: "--font-geist-sans",
+const alpino = localFont({
+  src: "./fonts/AlpinoVariable.woff",
+  display: "swap",
   weight: "100 900",
+  variable: "--font-alpino",
 });
 
 export const metadata: Metadata = {
-  title: "Fizz 3D",
+  title: "Fizzi 3D",
   description:
-    "Demo application, developed on NextJs 15, TailwindCSS, GSAP, ThreeJS",
+    "Demo application, developed on NextJs 15 (TypeScript), TailwindCSS, GSAP, ThreeJS",
+  authors: [
+    {
+      name: "Evgeniy Makhnin",
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -20,11 +27,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${alpinoVariable.variable} antialiased`}
-      >
-        {children}
+    <html lang="en" className={alpino.variable}>
+      <body className="overflow-x-hidden bg-yellow-300">
+        <Header />
+        <main>{children}
+          <ViewCanvas/>
+        </main>
+        <Footer/>
       </body>
     </html>
   );
